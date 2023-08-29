@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-image: linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%);
+    }
+
+    .row {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main-box {
+        width: 50%;
+        height: auto;
+        border: 1px solid black;
+        border-radius: 7px;
+        margin: 100px auto;
+        display: flex;
+        justify-self: start;
+        align-content: center;
+        flex-wrap: wrap;
+        padding: 20px;
+        background-color: #8EC5FC;
+        background-image: linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%);
+    }
+
+    .number {
+        width: 100%;
+        padding-bottom: 20px;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+
+    .txt {
+        width: 100%;
+        height: 50px;
+    }
+
+    .add {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        border-radius: 50%;
+        font-size: 40px;
+        margin: -30px auto 0;
+        border: 1px solid black;
+        background-color: rgb(59, 0, 0);
+        color: azure;
+    }
+
+    .child {
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+    ._box {
+        width: 200px;
+        height: 200px;
+        background-color: red;
+        border-radius: 7px;
+        border: 1px solid black;
+        margin: 20px;
+        display: flex;
+        align-content: start;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+
+    ._box>h2 {
+        width: 100%;
+        height: 50px;
+        font-size: 30px;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        padding: 5px
+    }
+
+    ._box>div {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+        padding: 5px;
+        border: 1px solid black;
+        background-color: rgb(48, 48, 48);
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        color: aliceblue;
+    }
+</style>
+
+<body>
+    <div class="row ">
+        <div class="main-box">
+            <h1 class="number">0 Note</h1>
+            <input type="text" class="txt">
+            <button class="add"> + </button>
+            <div class="child"></div>
+        </div>
+    </div>
+</body>
+<script>
+    let flag = 0
+    let conunter = 0
+    document.getElementsByClassName('add')[0].addEventListener('click', () => {
+        let _txt = document.getElementsByClassName('txt')[0]
+        if ((_txt.value != '')) {
+            let _box = document.createElement('div')
+            _box.classList.add('_box')
+            _box.innerHTML =
+                `<h2>${_txt.value}</h2>
+            <div onclick='_edit(this)'>eidt</div>
+            <div onclick ='_del(this)' class='delet'>x</div>
+            `
+            document.getElementsByClassName('child')[0].appendChild(_box)
+            conunter++
+            printNote()
+            if (flag == 0) {
+                _box.style.background = 'lightgoldenrodyellow'
+                flag++
+            } else {
+                _box.style.background = 'lightskyblue'
+                flag--
+            }
+            _txt.value = ''
+            _txt.focus()
+        } else {
+            alert('please complete the box!')
+        }
+    })
+    function _del(s) {
+        s.parentElement.remove();
+        conunter--
+        printNote()
+    }
+    function _edit(s){
+        s.previousElementSibling.setAttribute ('contenteditable', true)
+    }
+    function printNote() {
+        document.getElementsByClassName('number')[0].innerHTML = conunter + ' Notes add!'
+
+    }
+</script>
+
+</html>
